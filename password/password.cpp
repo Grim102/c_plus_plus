@@ -1,3 +1,5 @@
+//A program that generates psuedo-random strings of characters
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
