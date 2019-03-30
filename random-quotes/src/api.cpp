@@ -1,9 +1,7 @@
 #include"../include/api.hpp"
 #include<boost/asio.hpp>
-#include"../include/json.hpp"
 
 using boost::asio::ip::tcp;
-using json = nlohmann::json;
 
 api::api(string url, string subfolder)
 {
@@ -64,15 +62,11 @@ string api::call()
   // Process the response headers.
   std::string header;
   while(std::getline(response_stream, header) && header != "\r"){}
-    // std::cout << header << "\n";
-  // std::cout << "\n";
 
   // Write whatever content we already have to output.
   std::string output;
   if(response.size() > 0)
     std::getline(response_stream, output);
-    // std::cout << &response;
-  // std::cout << "\n";
 
   // json j = json::parse(output);
   // std::cout << j.dump()[1] << "\n";
