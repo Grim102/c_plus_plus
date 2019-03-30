@@ -1,17 +1,15 @@
-#include"../include/API.hpp"
+#include"../include/api.hpp"
 #include<boost/asio.hpp>
-#include"../include/JSON.hpp"
 
 using boost::asio::ip::tcp;
-using json = nlohmann::json;
 
-API::API(string url, string subfolder)
+api::api(string url, string subfolder)
 {
   this->url = url;
   this->subfolder = subfolder;
 }
 
-string API::call()
+string api::call()
 {
   // Get a list of endpoints corresponding to the server name.
   boost::asio::io_service io_service;
@@ -64,15 +62,11 @@ string API::call()
   // Process the response headers.
   std::string header;
   while(std::getline(response_stream, header) && header != "\r"){}
-    // std::cout << header << "\n";
-  // std::cout << "\n";
 
   // Write whatever content we already have to output.
   std::string output;
   if(response.size() > 0)
     std::getline(response_stream, output);
-    // std::cout << &response;
-  // std::cout << "\n";
 
   // json j = json::parse(output);
   // std::cout << j.dump()[1] << "\n";
