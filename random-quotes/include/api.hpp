@@ -5,14 +5,14 @@
 
 using std::string;
 
-class API
+class api
 {
   protected:
     string url;
     string subfolder;
 
   public:
-    API(string url, string subfolder = "");
+    api(string url, string subfolder = "");
 
     string call();
 };

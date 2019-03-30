@@ -1,17 +1,17 @@
-#include"../include/API.hpp"
+#include"../include/api.hpp"
 #include<boost/asio.hpp>
-#include"../include/JSON.hpp"
+#include"../include/json.hpp"
 
 using boost::asio::ip::tcp;
 using json = nlohmann::json;
 
-API::API(string url, string subfolder)
+api::api(string url, string subfolder)
 {
   this->url = url;
   this->subfolder = subfolder;
 }
 
-string API::call()
+string api::call()
 {
   // Get a list of endpoints corresponding to the server name.
   boost::asio::io_service io_service;
