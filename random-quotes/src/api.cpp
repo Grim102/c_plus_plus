@@ -3,12 +3,6 @@
 
 using boost::asio::ip::tcp;
 
-api::api(string url, string subfolder)
-{
-  this->url = url;
-  this->subfolder = subfolder;
-}
-
 string api::call()
 {
   // Get a list of endpoints corresponding to the server name.
@@ -67,9 +61,6 @@ string api::call()
   std::string output;
   if(response.size() > 0)
     std::getline(response_stream, output);
-
-  // json j = json::parse(output);
-  // std::cout << j.dump()[1] << "\n";
 
   return output;
 }
