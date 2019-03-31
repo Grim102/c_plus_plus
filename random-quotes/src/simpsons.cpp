@@ -1,14 +1,18 @@
 #include"../include/simpsons.hpp"
 
-json simpsons::getData()
+simpsons::simpsons()
+{
+  this->url = "thesimpsonsquoteapi.glitch.me";
+  this->subfolder = "/quotes";
+}
+
+string simpsons::getData()
 {
   string str = this->call();
-  json j = json::parse(str);
-  // std::cout << std::boolalpha;
-  // std::cout << (j.type() == json::value_t::array) << "\n";
-
-  for(auto out : j)
-    std::cout << out <<"\n";
-
-  return j;
+  json j_arr = json::parse(str);
+  json j = j_arr[0];
+  std::string character = j["character"];
+  std::string quote = j["quote"];
+  std::string output = "\"" + quote + "\"\n" + "- " + character + "\n"; 
+  return output;
 }

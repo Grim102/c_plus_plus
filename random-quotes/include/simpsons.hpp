@@ -6,9 +6,9 @@
 class simpsons : public api
 {
   public:
-    simpsons(string url, string subfolder) : api(url, subfolder){}
+    simpsons();
 
-    json getData();
+    string getData();
 };
 
 #endif //SIMPSONS_H
