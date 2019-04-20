@@ -17,6 +17,18 @@ public:
 
 private:
     Ui::Calculator *ui;
+    double calcVal = 0.0;
+    bool divTriggered = false;
+    bool multTriggered = false;
+    bool subtTriggered = false;
+    bool addTriggered = false;
+
+private slots:
+    void NumPressed();
+//    void MathButtonPressed();
+//    void EqualButton();
+//    void ChangeSign();
+
 };
 
 #endif // CALCULATOR_H
