@@ -18,6 +18,7 @@ public:
 private:
     Ui::Calculator *ui;
     double calcVal = 0.0;
+    double memVal = 0.0;
     bool divTriggered = false;
     bool multTriggered = false;
     bool subtTriggered = false;
@@ -28,6 +29,10 @@ private slots:
     void MathButtonPressed();
     void EqualButton();
     void ChangeSign();
+    void ClearScreen();
+    void AddToMemory();
+    void ClearMemory();
+    void GetFromMemory();
 
 };
 
