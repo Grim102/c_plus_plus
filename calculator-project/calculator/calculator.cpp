@@ -29,6 +29,14 @@ Calculator::Calculator(QWidget *parent) :
             SLOT(EqualButton()));
     connect(ui->Sign, SIGNAL(released()), this,
             SLOT(ChangeSign()));
+    connect(ui->Clear, SIGNAL(released()), this,
+            SLOT(ClearScreen()));
+    connect(ui->MemAdd, SIGNAL(released()), this,
+            SLOT(AddToMemory()));
+    connect(ui->MemClear, SIGNAL(released()), this,
+            SLOT(ClearMemory()));
+    connect(ui->MemGet, SIGNAL(released()), this,
+            SLOT(GetFromMemory()));
 }
 
 Calculator::~Calculator()
@@ -68,7 +76,7 @@ void Calculator::MathButtonPressed() {
     if(QString::compare(buttonVal, "/", Qt::CaseInsensitive) == 0) {
         this->divTriggered = true;
     }
-    else if(QString::compare(buttonVal, "*", Qt::CaseInsensitive) == 0) {
+    else if(QString::compare(buttonVal, "x", Qt::CaseInsensitive) == 0) {
         this->multTriggered = true;
     }
     else if(QString::compare(buttonVal, "-", Qt::CaseInsensitive) == 0) {
@@ -78,7 +86,7 @@ void Calculator::MathButtonPressed() {
         this->addTriggered = true;
     }
 
-    ui->Display->setText("");
+    ui->Display->setText(buttonVal);
 }
 
 void Calculator::EqualButton() {
@@ -113,4 +121,28 @@ void Calculator::ChangeSign() {
         dblDisplayVal *= -1;
         ui->Display->setText(QString::number(dblDisplayVal));
     }
+}
+
+void Calculator::ClearScreen() {
+    ui->Display->setText("0");
+    this->calcVal = 0.0;
+}
+
+void Calculator::AddToMemory() {
+    QString memoryVal = ui->Display->text();
+    QRegExp reg("[0-9.]*");
+
+    if(reg.exactMatch(memoryVal)) {
+        double dblMemoryVal = memoryVal.toDouble();
+        this->memVal = dblMemoryVal;
+    }
+}
+
+void Calculator::ClearMemory() {
+    this->memVal = 0.0;
+}
+
+void Calculator::GetFromMemory() {
+    double memoryVal = this->memVal;
+    ui->Display->setText(QString::number(memoryVal));
 }
