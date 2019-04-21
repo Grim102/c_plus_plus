@@ -1,9 +1,9 @@
-// File Name: driver.cpp
+// File Name: brackets.cpp
 //
 // Prompts the user for a filename, and then attempts to open the file
 // and test for correct syntax concerning all brackets.
 
-#include "charStack.h"
+#include "include/charStack.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -25,7 +25,7 @@ int main()
 
     //Below is the prompt to input a filename.
 
-    cout << "Welcome to Document Tester 1.0" << endl << endl;
+    cout << "Welcome to Brackets 1.0" << endl << endl;
     cout << "Please enter the name of the document: ";
     cin >> doc;
 

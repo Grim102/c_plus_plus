@@ -6,7 +6,7 @@
 //
 // This file contains the function definitions for the CharStack class.
 
-#include "charStack.h"
+#include "../include/charStack.h"
 #include <cassert>
 
 //***********************************************************
