@@ -16,6 +16,19 @@ Calculator::Calculator(QWidget *parent) :
         connect(numButtons[i], SIGNAL(released()), this,
                 SLOT(NumPressed()));
     }
+
+    connect(ui->Divide, SIGNAL(released()), this,
+            SLOT(MathButtonPressed()));
+    connect(ui->Multiply, SIGNAL(released()), this,
+            SLOT(MathButtonPressed()));
+    connect(ui->Subtract, SIGNAL(released()), this,
+            SLOT(MathButtonPressed()));
+    connect(ui->Add, SIGNAL(released()), this,
+            SLOT(MathButtonPressed()));
+    connect(ui->Equals, SIGNAL(released()), this,
+            SLOT(EqualButton()));
+    connect(ui->Sign, SIGNAL(released()), this,
+            SLOT(ChangeSign()));
 }
 
 Calculator::~Calculator()
@@ -36,5 +49,68 @@ void Calculator::NumPressed() {
         QString newVal = displayVal + buttonVal;
         double dblNewVal = newVal.toDouble();
         ui->Display->setText(QString::number(dblNewVal, 'g', 16));
+    }
+}
+
+void Calculator::MathButtonPressed() {
+    this->divTriggered = false;
+    this->multTriggered = false;
+    this->subtTriggered = false;
+    this->addTriggered = false;
+
+    QString displayVal = ui->Display->text();
+    calcVal = displayVal.toDouble();
+
+    QPushButton *button = static_cast<QPushButton *>(sender());
+
+    QString buttonVal = button->text();
+
+    if(QString::compare(buttonVal, "/", Qt::CaseInsensitive) == 0) {
+        this->divTriggered = true;
+    }
+    else if(QString::compare(buttonVal, "*", Qt::CaseInsensitive) == 0) {
+        this->multTriggered = true;
+    }
+    else if(QString::compare(buttonVal, "-", Qt::CaseInsensitive) == 0) {
+        this->subtTriggered = true;
+    }
+    else if(QString::compare(buttonVal, "+", Qt::CaseInsensitive) == 0) {
+        this->addTriggered = true;
+    }
+
+    ui->Display->setText("");
+}
+
+void Calculator::EqualButton() {
+    double solution = 0.0;
+    QString displayVal = ui->Display->text();
+    double dblDisplayVal = displayVal.toDouble();
+
+    if(divTriggered || multTriggered || subtTriggered || addTriggered) {
+        if(divTriggered) {
+            solution = this->calcVal / dblDisplayVal;
+        }
+        else if(multTriggered) {
+            solution = this->calcVal * dblDisplayVal;
+        }
+        else if(subtTriggered) {
+            solution = this->calcVal - dblDisplayVal;
+        }
+        else if(addTriggered) {
+            solution = this->calcVal + dblDisplayVal;
+        }
+    }
+
+    ui->Display->setText(QString::number(solution));
+}
+
+void Calculator::ChangeSign() {
+    QString displayVal = ui->Display->text();
+    QRegExp reg("[-]?[0-9.]*");
+
+    if(reg.exactMatch(displayVal)) {
+        double dblDisplayVal = displayVal.toDouble();
+        dblDisplayVal *= -1;
+        ui->Display->setText(QString::number(dblDisplayVal));
     }
 }
