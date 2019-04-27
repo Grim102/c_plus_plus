@@ -35,7 +35,9 @@ int main()
         base = new megaMillions();
         break;
     }  
+
     base->run();
+    
     cout << endl << endl << "Run program again? ";
     cin >> repeat;
    } while (repeat == 'y' || repeat == 'Y');
