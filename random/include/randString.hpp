@@ -1,12 +1,15 @@
 #ifndef RANDSTRING_H
 #define RANDSTRING_H
 
-#include"randBase.hpp"
+#include "randBase.hpp"
 
 class randString : public randBase
 {
+  private:
+    char character;
+  
   public:
-    randString() : randBase(33, 126){}
+    randString() : randBase(33, 126){srand(time(0));}
 
     void run();
 };
